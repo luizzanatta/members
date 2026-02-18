@@ -1,13 +1,13 @@
 # Members MVP Infra
 
-Base de projeto com **Next.js 14+ (App Router)**, **TypeScript**, **Tailwind CSS**, **Clerk** para autenticação e **Prisma** conectado ao **PostgreSQL**.
+Base de projeto com **Next.js 14+ (App Router)**, **TypeScript**, **Tailwind CSS** e **Prisma** conectado ao **PostgreSQL**.
 
 ## Requisitos
 
 - Docker + Docker Compose
-- Node.js 20+
+- Node.js 20+ (para comandos Prisma localmente)
 
-## Configuração de ambiente
+## Variáveis de ambiente
 
 1. Copie o arquivo de exemplo:
 
@@ -15,19 +15,7 @@ Base de projeto com **Next.js 14+ (App Router)**, **TypeScript**, **Tailwind CSS
 cp .env.example .env
 ```
 
-2. Crie sua conta no Clerk e obtenha as chaves no dashboard:
-   - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
-   - `CLERK_SECRET_KEY`
-
-   Console Clerk: https://dashboard.clerk.com/
-
-3. Preencha também a `DATABASE_URL` no `.env` (já há um valor de exemplo para uso com `docker-compose`).
-
-> **Nota:** depois de adicionar/alterar as chaves do Clerk no `.env`, reinicie o servidor de desenvolvimento (`npm run dev`) para aplicar as variáveis.
-
 ## Rodando com Docker
-
-Suba app + banco:
 
 ```bash
 docker compose up --build
@@ -35,29 +23,15 @@ docker compose up --build
 
 A aplicação ficará disponível em `http://localhost:3000`.
 
-## Prisma
+## Banco de dados e Prisma
 
-Com a stack em execução e `.env` configurado, rode a migração:
+Com a stack em execução e o `.env` configurado, rode as migrações de desenvolvimento:
 
 ```bash
 npx prisma migrate dev
 ```
 
-## Rodando em desenvolvimento
-
-```bash
-npm install
-npm run dev
-```
-
-## Fluxo de autenticação
-
-- `/sign-in` para login
-- `/sign-up` para cadastro
-- `/dashboard` protegido por middleware do Clerk
-- Ao abrir `/dashboard`, a rota `POST /api/sync-user` sincroniza usuário do Clerk no PostgreSQL via Prisma
-
-## Rotas principais
+## Rotas placeholder
 
 - `/` Página inicial
-- `/dashboard` Área autenticada
+- `/dashboard` Página de dashboard
